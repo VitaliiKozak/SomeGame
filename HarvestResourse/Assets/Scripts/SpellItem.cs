@@ -11,10 +11,9 @@ public class SpellItem : MonoBehaviour
 
     public void Update()
     {
-        if (Spell.TimeToShoot >= 0)
+        if (Spell.ProgresToCast >= 0)
         {
-            Spell.TimeToShoot -= Time.deltaTime;
-            Splash.fillAmount = Mathf.Clamp(1 - Spell.TimeToShoot / Spell.TimeBetweenShoot, 0, 1);
+            Splash.fillAmount = Spell.ProgresToCast;
             Splash.gameObject.SetActive(!(Splash.fillAmount >= 1));
         }
     }
@@ -23,6 +22,5 @@ public class SpellItem : MonoBehaviour
     {
         Splash.fillAmount = 0;
         Icon.sprite = Spell.Icon;
-        Spell.TimeToShoot = 0;
     }
 }

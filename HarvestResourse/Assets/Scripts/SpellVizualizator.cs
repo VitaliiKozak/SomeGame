@@ -12,8 +12,7 @@ public class SpellVizualizator : MonoBehaviour
     {
         GameObject GO = Instantiate(_spellItemPrefabs);
         GO.transform.SetParent(_spellHolder, false);
-        SpellItem spellItem = GO.GetComponent<SpellItem>();
-        spellItem.Spell = spell;
+        GO.GetComponent<SpellItem>().Spell = spell;  
     }
 
 }

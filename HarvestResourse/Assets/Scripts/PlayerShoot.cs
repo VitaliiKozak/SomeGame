@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private Camera _fpsCamera;
-    [SerializeField] private ParticleSystem _magicEffect;
+    
 
     [SerializeField] private List<Spell> _allSpells;
     [SerializeField] private SpellVizualizator _spellVizualizator;
+
+    [SerializeField] private ParticleSystem _magicEffect;
 
     private Spell _curentSpell;
     private int _curentSpellPos;
@@ -36,11 +37,15 @@ public class PlayerShoot : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1") && _curentSpell.TimeToShoot <= 0)
+        for (int i = 0; i < _allSpells.Count; i++)
         {
-            Shoot();
-            
-            _curentSpell.TimeToShoot = _curentSpell.TimeBetweenShoot;
+            _allSpells[i].UpdateTime(Time.deltaTime);
+        }
+
+        if (Input.GetButtonDown("Fire1") && _curentSpell.ReadyToCast)
+        {
+            _magicEffect.Play();
+            _curentSpell.SpellCast();
         }
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
@@ -64,6 +69,7 @@ public class PlayerShoot : MonoBehaviour
             _curentSpellPos++;
         }
         _curentSpell = _allSpells[_curentSpellPos];
+        Debug.Log($"Select Spell{_curentSpell.Name}");
         //SelectSpell(_curentSpellPos);
     }
 
@@ -78,40 +84,9 @@ public class PlayerShoot : MonoBehaviour
             _curentSpellPos--;
         }
         _curentSpell = _allSpells[_curentSpellPos];
+        Debug.Log($"Select Spell{_curentSpell.Name}");
         //SelectSpell(_curentSpellPos);
     }
-
-    private void Shoot()
-    {
-        _magicEffect.Play();
-
-        switch (_curentSpell.Type)
-        {
-            case SpellType.Heale:
-                {
-                    Debug.Log($"You heale by {_curentSpell.Damage}♥");
-                }
-                break;
-            case SpellType.Damage:
-                {
-                    RaycastHit hit;
-                    if (Physics.Raycast(_fpsCamera.transform.position, _fpsCamera.transform.forward, out hit, _curentSpell.Range))
-                    {
-                        Enemy target = hit.transform.GetComponent<Enemy>();
-                        Debug.Log(hit.transform.name);
-                        if (target != null)
-                        {
-                            target.TakeDamage(_curentSpell.Damage);
-                        }
-                    }
-                }
-                break;
-        }
-
-        
-    }
-
-
 
     //private void OnDrawGizmosSelected()
     //{
