@@ -25,6 +25,10 @@ public class Enemy : MonoBehaviour
     private void ModifyHealth(float amount)
     {
         _health -= amount;
+        if(_health > _maxHealth)
+        {
+            _health = _maxHealth;
+        }
         UpdateHealthBar();
         if(_health <=0)
         {
@@ -33,6 +37,9 @@ public class Enemy : MonoBehaviour
         else if(_health < _maxHealth)
         {
             _canvasGameobject.SetActive(true);
+        }else if(_health >= _maxHealth)
+        {
+            _canvasGameobject.SetActive(false);
         }
     }
 

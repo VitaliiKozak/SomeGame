@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpHaight;
+    [SerializeField] private float _mass;
     [SerializeField] private float _graviry = -9.8f;
     private Vector3 _velosity;
 
@@ -39,10 +40,10 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && _isGraunded)
         {
-            _velosity.y = Mathf.Sqrt(_jumpHaight * -1f * _graviry);
+            _velosity.y = Mathf.Sqrt(_jumpHaight * -1f * (_graviry * _mass));
         }
 
-        _velosity.y += _graviry * Time.deltaTime;
+        _velosity.y +=  (_mass*_graviry) * Time.deltaTime;
         _characterController.Move(_velosity * Time.deltaTime);
     }
 

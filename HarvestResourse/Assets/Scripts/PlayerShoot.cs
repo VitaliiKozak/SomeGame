@@ -32,6 +32,8 @@ public class PlayerShoot : MonoBehaviour
         {
             _spellVizualizator.AddSpellOnBar(_allSpells[i]);
         }
+
+        SelectCurentSpell();
     }
 
 
@@ -59,7 +61,7 @@ public class PlayerShoot : MonoBehaviour
     }
 
 
-    private void NextSpell()
+    private void PreviouseSpell()
     {
         if(_allSpells.Count - 1 == _curentSpellPos)
         {
@@ -69,11 +71,10 @@ public class PlayerShoot : MonoBehaviour
             _curentSpellPos++;
         }
         _curentSpell = _allSpells[_curentSpellPos];
-        Debug.Log($"Select Spell{_curentSpell.Name}");
-        //SelectSpell(_curentSpellPos);
+        SelectCurentSpell();
     }
 
-    private void PreviouseSpell()
+    private void NextSpell()
     {
         if (_curentSpellPos == 0)
         {
@@ -84,8 +85,12 @@ public class PlayerShoot : MonoBehaviour
             _curentSpellPos--;
         }
         _curentSpell = _allSpells[_curentSpellPos];
-        Debug.Log($"Select Spell{_curentSpell.Name}");
-        //SelectSpell(_curentSpellPos);
+        SelectCurentSpell();
+    }
+
+    private void SelectCurentSpell()
+    {
+        _spellVizualizator.SelectSpell(_curentSpell);
     }
 
     //private void OnDrawGizmosSelected()

@@ -13,13 +13,11 @@ public class FireBallSpell : Spell
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Range))
         {
             Enemy target = hit.transform.GetComponent<Enemy>();
-
             if (target != null)
             {
                 target.TakeDamage(Damage);
             }
         }
-
         TimeToCast = TimeBetweenCast;
     }
 }

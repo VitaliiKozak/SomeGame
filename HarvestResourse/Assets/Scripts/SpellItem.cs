@@ -7,6 +7,7 @@ public class SpellItem : MonoBehaviour
 {
     public Image Icon;
     public Image Splash;
+    public Image Border;
     public Spell Spell;
 
     public void Update()
@@ -16,6 +17,11 @@ public class SpellItem : MonoBehaviour
             Splash.fillAmount = Spell.ProgresToCast;
             Splash.gameObject.SetActive(!(Splash.fillAmount >= 1));
         }
+    }
+
+    public void SetBorderVisible(bool status)
+    {
+        Border.gameObject.SetActive(status);
     }
 
     private void Start()
