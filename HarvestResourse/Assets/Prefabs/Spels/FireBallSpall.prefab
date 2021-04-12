@@ -46,8 +46,8 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: f13de72b704f4214e86d729fa9d0c03b, type: 3}
   Name: Fire Ball
   TimeBetweenCast: 1
-  TimeToCast: 0
+  TimeToCast: -0.8707966
   Range: 150
-  Damage: 8
+  Damage: 15
   _impactEffect: {fileID: 2321443321050426984, guid: 2d9495b583a349448a3ee3dba9237205,
     type: 3}
