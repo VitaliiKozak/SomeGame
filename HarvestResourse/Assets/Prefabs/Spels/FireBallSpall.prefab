@@ -49,3 +49,5 @@ MonoBehaviour:
   TimeToCast: 0
   Range: 150
   Damage: 8
+  _impactEffect: {fileID: 2321443321050426984, guid: 2d9495b583a349448a3ee3dba9237205,
+    type: 3}

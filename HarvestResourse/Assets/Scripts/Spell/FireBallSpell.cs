@@ -7,6 +7,8 @@ public class FireBallSpell : Spell
     public float Range;
     public float Damage;
 
+    [SerializeField] private GameObject _impactEffect;
+
     public override void SpellCast()
     {
         RaycastHit hit;
@@ -17,6 +19,9 @@ public class FireBallSpell : Spell
             {
                 target.TakeDamage(Damage);
             }
+
+            GameObject impactGO = Instantiate(_impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impactGO, 2f);
         }
         TimeToCast = TimeBetweenCast;
     }

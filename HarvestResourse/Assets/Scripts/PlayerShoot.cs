@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    
-
     [SerializeField] private List<Spell> _allSpells;
     [SerializeField] private SpellVizualizator _spellVizualizator;
 
     [SerializeField] private ParticleSystem _magicEffect;
+    [SerializeField] private GameObject _impactEffect;
 
     private Spell _curentSpell;
     private int _curentSpellPos;
