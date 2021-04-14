@@ -17,7 +17,7 @@ public class AIMove : MonoBehaviour
     
     [SerializeField] private AIType _aIType;
 
-    [Header("Defoulte AI")]
+    [Header("Defaulte AI")]
     [SerializeField] private Transform _target;
     [Range(1, 100)]
     [SerializeField] private float _range = 5;
@@ -25,7 +25,6 @@ public class AIMove : MonoBehaviour
     [Header("Wander SetUp")]
     [SerializeField] private Vector3 _targetTemp;
     private float _timeToUpdate = 1f;
-
 
     [Header("Warior SetUp")]
     [SerializeField] private Vector3 _spawnPosition;
@@ -37,7 +36,6 @@ public class AIMove : MonoBehaviour
     private int _curentPointNumber = 0;
 
   
-    
 
     private void Start()
     {
@@ -95,18 +93,18 @@ public class AIMove : MonoBehaviour
                 }
                 break;
 
-            case AIType.Patrol:
+            case AIType.Patrol://варінт ключа зі Світча
                 {
-                    if(_currentPoint == null)
+                    if(_currentPoint == null)// превірка чи змінна пуста
                     {
-                        if(_patrolPoints.Count - 1 == _curentPointNumber)
+                        if(_patrolPoints.Count - 1 == _curentPointNumber)//перевірка чи дійшли ми до кінця списку з точками
                         {
-                            _curentPointNumber = 0;
-                            _currentPoint = _patrolPoints[_curentPointNumber];
+                            _curentPointNumber = 0;//обнулення лічільника
+                            _currentPoint = _patrolPoints[_curentPointNumber];//беремо першу точку зі списку
                         }
-                        else
+                        else//якащо ми не дійшли кінця мписку
                         {
-                            _currentPoint = _patrolPoints[++_curentPointNumber];
+                            _currentPoint = _patrolPoints[++_curentPointNumber];//беремо наступну точку
                         }
                     }
                     else
@@ -127,16 +125,16 @@ public class AIMove : MonoBehaviour
                         }
                     }
                 }
-
                 break;
+
             case AIType.Warior:
                 {
-                    if(_target == null || _target == default)
+                    if( _target == default)
                     {
                         _target = FindTarget(transform.position, _range);
                     }
                     Vector3 move;
-                    if (_target != default || _target != null)
+                    if ( _target != null)
                     {
                         move = _target.position - transform.position;
                         _characterController.Move(move.normalized * _speed * Time.deltaTime);
@@ -155,10 +153,9 @@ public class AIMove : MonoBehaviour
                         }
                     }
                 }
-                break;
-        }
 
-        
+                break;
+        }        
     }
 
 
